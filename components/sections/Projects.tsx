@@ -44,7 +44,7 @@ const projects = [
 const Projects = () => {
     return (
         <SectionWrapper id="projects">
-            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-16 text-center">Selected Work</h2>
+            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-16 text-center">Projects</h2>
 
             <div className="space-y-24">
                 {projects.map((project, index) => (
@@ -111,7 +111,7 @@ const Projects = () => {
 
             <div className="mt-20 flex justify-center">
                 <Button size="lg" className="rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/10" asChild>
-                    <a href="https://github.com/StartUp-User" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/shubhamp-2905" target="_blank" rel="noopener noreferrer">
                         <Github className="w-5 h-5 mr-2" /> View Full Project Archive
                     </a>
                 </Button>
