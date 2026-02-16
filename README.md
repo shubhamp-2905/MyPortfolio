@@ -16,12 +16,12 @@ Computer Science student focused on backend systems, machine learning pipelines 
 ## 💼 Experience
 
 ### Data Science Intern @ TechCorp Inc.
-*2023 - Present*
+*2024*
 - Designed and deployed a predictive maintenance model achieving **15% downtime reduction**.
 - Built automated ETL pipelines processing **500GB+ daily data** using Python and SQL.
 
 ### Full Stack Developer Intern @ StartupX
-*2022 - 2023*
+*2024*
 - Refactored legacy React codebase to improve **First Contentful Paint (FCP) by 40%**.
 - Implemented secure Stripe payment integration handling **$10k+ monthly transaction volume**.
 
