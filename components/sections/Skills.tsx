@@ -7,7 +7,7 @@ const skills = {
     "Languages": ["Python", "C++", "SQL", "JavaScript", "TypeScript"],
     "Frameworks": ["React", "Next.js", "Node.js", "Express", "FastAPI", "PyTorch"],
     "AI & ML": ["Scikit-learn", "TensorFlow", "NLP", "LLMs", "RAG", "Computer Vision"],
-    "Tools & Cloud": ["Git", "Docker", "Kubernetes", "AWS", "CI/CD"]
+    "Tools & Cloud": ["Git", "Docker", "Kubernetes", "AWS", "CI/CD", "Photoshop"]
 };
 
 const Skills = () => {

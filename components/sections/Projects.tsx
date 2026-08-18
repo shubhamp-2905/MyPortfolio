@@ -1,22 +1,10 @@
 "use client";
 import React from "react";
-import SectionWrapper from "@/components/shared/SectionWrapper";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
 import { motion } from "framer-motion";
 
 const projects = [
-    {
-        title: "TalentSync",
-        role: "Intelligent Resume Matching System",
-        problem: "Recruiters spend too much time manually screening resumes, missing good candidates due to keyword mismatches.",
-        approach: "Built a semantic search engine using LLMs to understand resume context beyond simple keywords. Implemented a vector database for similarity search.",
-        outcome: "Reduced screening time by 70% and improved match quality.",
-        tech: ["Next.js", "MongoDB", "Python (FastAPI)", "OpenAI API", "Pinecone"],
-        color: "from-blue-500/20 to-purple-500/20",
-        github: "https://github.com/shubhamp-2905",
-        demo: "https://demo.com"
-    },
     {
         title: "FoodChain",
         role: "Supply Chain Optimization Platform",
@@ -26,26 +14,33 @@ const projects = [
         tech: ["Scikit-learn", "Flask", "PostgreSQL", "React", "Pandas"],
         color: "from-orange-500/20 to-red-500/20",
         github: "https://github.com/shubhamp-2905",
-        demo: "https://demo.com"
+        demo: "https://food-chain-puce.vercel.app"
     },
     {
-        title: "Real-Time Chat Framework",
-        role: "High-Concurrency Messaging System",
-        problem: "Standard polling-based chat apps suffer from latency and server load at scale.",
-        approach: "Architected a WebSocket-based pub/sub system. Handled connection state management and message persistence asynchronously.",
-        outcome: "Supports 10k+ concurrent connections with sub-100ms latency.",
-        tech: ["Node.js", "Socket.io", "Redis", "React", "MongoDB"],
-        color: "from-pink-500/20 to-rose-500/20",
-        github: "https://github.com/shubhamp-2905",
-        demo: "https://demo.com"
+        title: "InvestWise AI",
+        role: "Multi-Agent Collaborative Investment Platform",
+        problem: "Traditional investment analysis is fragmented, requiring manual synthesis of market data, technical charts, risk indicators, and financial statements.",
+        approach: "Architected a multi-agent consensus system on a stateful graph (LangGraph) involving specialized agents (Market Intel, Technicals, Risk) resolving decisions via structured debate.",
+        outcome: "Delivered an institutional-grade SaaS dashboard with stock explorer, live API pricing, mock portfolio tracking, and interactive analysis ledger history.",
+        tech: ["Next.js", "LangGraph", "Twelve Data API", "Recharts", "TailwindCSS", "Python"],
+        color: "from-emerald-500/20 to-teal-500/20",
+        github: "https://github.com/shubhamp-2905/InvestWise-AI"
+    },
+    {
+        title: "TalentSync",
+        role: "Intelligent Resume Matching System",
+        problem: "Recruiters spend too much time manually screening resumes, missing good candidates due to keyword mismatches.",
+        approach: "Built a semantic search engine using LLMs to understand resume context beyond simple keywords. Implemented a vector database for similarity search.",
+        outcome: "Reduced screening time by 70% and improved match quality.",
+        tech: ["Next.js", "MongoDB", "Python (FastAPI)", "OpenAI API", "Pinecone"],
+        color: "from-blue-500/20 to-purple-500/20",
+        github: "https://github.com/shubhamp-2905"
     }
 ];
 
 const Projects = () => {
     return (
-        <SectionWrapper id="projects">
-            <h2 className="text-4xl md:text-5xl font-bold font-heading mb-16 text-center">Projects</h2>
-
+        <div className="w-full">
             <div className="space-y-24">
                 {projects.map((project, index) => (
                     <motion.div
@@ -64,7 +59,7 @@ const Projects = () => {
                             <div className="lg:col-span-4 space-y-6">
                                 <div>
                                     <div className="text-primary font-mono text-sm mb-2">{project.role}</div>
-                                    <h3 className="text-3xl font-bold font-heading">{project.title}</h3>
+                                    <h3 className="text-3xl font-bold font-heading text-white">{project.title}</h3>
                                 </div>
 
                                 <div className="flex flex-wrap gap-2">
@@ -81,11 +76,13 @@ const Projects = () => {
                                             <Github className="w-4 h-4 mr-2" /> Code
                                         </a>
                                     </Button>
-                                    <Button size="sm" className="rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm" asChild>
-                                        <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                                            <ExternalLink className="w-4 h-4 mr-2" /> Live Demo
-                                        </a>
-                                    </Button>
+                                    {project.demo && (
+                                        <Button size="sm" className="rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm" asChild>
+                                            <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                                                <ExternalLink className="w-4 h-4 mr-2" /> Live Demo
+                                            </a>
+                                        </Button>
+                                    )}
                                 </div>
                             </div>
 
@@ -116,7 +113,7 @@ const Projects = () => {
                     </a>
                 </Button>
             </div>
-        </SectionWrapper>
+        </div>
     );
 };
 

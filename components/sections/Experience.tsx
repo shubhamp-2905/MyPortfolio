@@ -5,15 +5,15 @@ import SectionWrapper from "@/components/shared/SectionWrapper";
 const experience = [
     {
         role: "Data Science Intern",
-        company: "TechCorp Inc.",
-        period: "2023 - Present",
-        desc: "Designed and deployed a predictive maintenance model achieving 15% downtime reduction. Built automated ETL pipelines processing 500GB+ daily data using Python and SQL."
+        company: "Ediglobe",
+        period: "01 Oct 2024 - 30 Nov 2024",
+        desc: "Engineered end-to-end ML data pipelines (preprocessing, outlier detection, feature transformation) using Python, Pandas, and NumPy. Debugged and optimized code to reduce pipeline iteration time by 40%. Developed and evaluated predictive models through systematic experimentation, improving accuracy by 12–15%."
     },
     {
-        role: "Full Stack Developer Intern",
-        company: "StartupX",
-        period: "2022 - 2023",
-        desc: "Refactored legacy React codebase to improve FCP by 40%. Implemented secure Stripe payment integration handling $10k+ monthly transaction volume."
+        role: "Full Stack Developer Intern (MERN)",
+        company: "Sumago Infotech Pvt. Ltd.",
+        period: "14 Jan 2024 - 15 June 2024",
+        desc: "Built reusable, scalable software features from scratch using MongoDB, Express.js, React, and Node.js. Designed and integrated RESTful APIs over HTTP. Collaborated with cross-functional teams using Git to write clean code, participate in reviews, and resolve issues; awarded Best Performing Intern."
     }
 ];
 
