@@ -12,6 +12,12 @@ export default function SpotlightCard({
   className = "",
 }: SpotlightCardProps) {
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (
+      typeof window !== "undefined" &&
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches
+    ) {
+      return;
+    }
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;

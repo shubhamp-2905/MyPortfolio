@@ -51,7 +51,7 @@ export default function Achievements() {
 
         <div
           ref={gridRef}
-          className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
           {ACHIEVEMENTS.map((item) => (
             <SpotlightCard
@@ -83,7 +83,7 @@ export default function Achievements() {
                       href={item.verifyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group inline-flex items-center gap-1 font-mono text-xs text-[var(--ink)] transition-colors hover:text-[var(--accent)]"
+                      className="group inline-flex min-h-[44px] items-center gap-1 font-mono text-xs text-[var(--ink)] transition-colors hover:text-[var(--accent)]"
                     >
                       <span>Verify credential</span>
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

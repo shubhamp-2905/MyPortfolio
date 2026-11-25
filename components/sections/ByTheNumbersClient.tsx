@@ -34,11 +34,11 @@ export default function ByTheNumbersClient({
 
         gsap.to(obj, {
           val: target,
-          duration: 1.1,
+          duration: 1.0,
           ease: "power3.out",
           scrollTrigger: {
             trigger: el,
-            start: "top 88%",
+            start: "top 90%",
             once: true,
           },
           onUpdate: () => {
@@ -52,14 +52,14 @@ export default function ByTheNumbersClient({
 
       const tiles = gridRef.current.querySelectorAll(".number-tile");
       gsap.from(tiles, {
-        y: 18,
+        y: 14,
         opacity: 0,
-        duration: 0.7,
-        stagger: 0.06,
+        duration: 0.65,
+        stagger: 0.05,
         ease: "power3.out",
         scrollTrigger: {
           trigger: gridRef.current,
-          start: "top 85%",
+          start: "top 88%",
           once: true,
         },
       });
@@ -73,10 +73,10 @@ export default function ByTheNumbersClient({
       ref={sectionRef}
       className="relative overflow-hidden bg-[#0B0F19] py-16 text-white md:py-24"
     >
-      {/* Subtle accent glow */}
+      {/* Subtle accent glow (lighter on mobile) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-24 top-0 h-[380px] w-[380px] rounded-full bg-[#3730A3]/25 blur-[130px]"
+        className="pointer-events-none absolute -right-24 top-0 h-[280px] w-[280px] rounded-full bg-[#3730A3]/25 blur-[90px] md:h-[380px] md:w-[380px] md:blur-[130px]"
       />
 
       <div className="site-container relative z-10">
@@ -85,7 +85,7 @@ export default function ByTheNumbersClient({
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-indigo-300">
               By the numbers
             </p>
-            <h2 className="mt-2 font-serif text-4xl tracking-tight text-white sm:text-5xl">
+            <h2 className="mt-2 font-serif text-[clamp(2rem,4vw,3.15rem)] leading-[1.08] tracking-tight text-white">
               Measurable engineering output.
             </h2>
           </div>
@@ -93,36 +93,37 @@ export default function ByTheNumbersClient({
             href={SITE_CONFIG.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 font-mono text-xs text-white/90 transition-colors hover:border-indigo-400/50 hover:bg-white/10"
+            className="group inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 font-mono text-xs text-white/90 transition-colors hover:border-indigo-400/50 hover:bg-white/10"
           >
             <span>Visit GitHub</span>
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </a>
         </div>
 
+        {/* 2 cols compact on phone/tablet, 4 cols on desktop */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          className="grid grid-cols-2 gap-3.5 sm:gap-4 lg:grid-cols-4"
         >
           {/* 9.06 CGPA */}
-          <div className="number-tile rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-            <p className="font-serif text-4xl tracking-tight text-white sm:text-5xl">
+          <div className="number-tile rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-6">
+            <p className="font-serif text-[clamp(1.75rem,3.6vw,3rem)] leading-none tracking-tight text-white">
               <span data-count-to="9.06" data-decimals="2">
                 9.06
               </span>
             </p>
-            <p className="mt-3 font-mono text-xs uppercase tracking-[0.1em] text-indigo-300">
+            <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-indigo-300 sm:text-xs">
               Academic CGPA
             </p>
-            <p className="mt-1.5 text-xs text-white/65">
-              B.Tech Computer Science (Data Science), VIIT Pune
+            <p className="mt-1.5 text-xs leading-relaxed text-white/70">
+              B.Tech CS (Data Science), VIIT Pune
             </p>
           </div>
 
           {/* LIVE GitHub repos */}
-          <div className="number-tile rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-            <div className="flex items-center justify-between">
-              <p className="font-serif text-4xl tracking-tight text-white sm:text-5xl">
+          <div className="number-tile rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-6">
+            <div className="flex flex-wrap items-center justify-between gap-1.5">
+              <p className="font-serif text-[clamp(1.75rem,3.6vw,3rem)] leading-none tracking-tight text-white">
                 {publicRepos !== null ? (
                   <span data-count-to={publicRepos} data-decimals="0">
                     {publicRepos}
@@ -131,98 +132,98 @@ export default function ByTheNumbersClient({
                   <span>—</span>
                 )}
               </p>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-emerald-300">
+              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-emerald-300">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                 Live
               </span>
             </div>
-            <p className="mt-3 font-mono text-xs uppercase tracking-[0.1em] text-indigo-300">
-              Public GitHub Repositories
+            <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-indigo-300 sm:text-xs">
+              Public Repos
             </p>
-            <p className="mt-1.5 text-xs text-white/65">
+            <p className="mt-1.5 break-words text-xs leading-relaxed text-white/70">
               {followers !== null
-                ? `${followers} followers on @${SITE_CONFIG.githubUsername}`
+                ? `${followers} followers · @${SITE_CONFIG.githubUsername}`
                 : `@${SITE_CONFIG.githubUsername}`}
             </p>
           </div>
 
           {/* 1 Sponsored project */}
-          <div className="number-tile rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-            <p className="font-serif text-4xl tracking-tight text-white sm:text-5xl">
+          <div className="number-tile rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-6">
+            <p className="font-serif text-[clamp(1.75rem,3.6vw,3rem)] leading-none tracking-tight text-white">
               <span data-count-to="1" data-decimals="0">
                 1
               </span>
             </p>
-            <p className="mt-3 font-mono text-xs uppercase tracking-[0.1em] text-indigo-300">
+            <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-indigo-300 sm:text-xs">
               Sponsored Project
             </p>
-            <p className="mt-1.5 text-xs text-white/65">
+            <p className="mt-1.5 text-xs leading-relaxed text-white/70">
               Evidentia AI · Code Culture Technical Solutions
             </p>
           </div>
 
           {/* 16K+ records */}
-          <div className="number-tile rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-            <p className="font-serif text-4xl tracking-tight text-white sm:text-5xl">
+          <div className="number-tile rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-6">
+            <p className="font-serif text-[clamp(1.75rem,3.6vw,3rem)] leading-none tracking-tight text-white">
               <span data-count-to="16" data-decimals="0">
                 16
               </span>
               <span className="text-indigo-300">K+</span>
             </p>
-            <p className="mt-3 font-mono text-xs uppercase tracking-[0.1em] text-indigo-300">
+            <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-indigo-300 sm:text-xs">
               Records Processed
             </p>
-            <p className="mt-1.5 text-xs text-white/65">
-              Supplier-product records in FoodChain AI Medallion pipeline
+            <p className="mt-1.5 text-xs leading-relaxed text-white/70">
+              FoodChain AI Medallion pipeline
             </p>
           </div>
 
           {/* 376 to 2 queries */}
-          <div className="number-tile rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-            <p className="font-serif text-3xl tracking-tight text-white sm:text-4xl">
-              <span className="text-white/40 line-through">376</span>{" "}
+          <div className="number-tile rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-6">
+            <p className="font-serif text-[clamp(1.35rem,3vw,2.5rem)] leading-none tracking-tight text-white">
+              <span className="text-white/45 line-through">376</span>{" "}
               <span className="text-indigo-300">→</span>{" "}
               <span data-count-to="2" data-decimals="0">
                 2
               </span>
             </p>
-            <p className="mt-3 font-mono text-xs uppercase tracking-[0.1em] text-indigo-300">
-              Queries Per Request
+            <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-indigo-300 sm:text-xs">
+              Queries / Request
             </p>
-            <p className="mt-1.5 text-xs text-white/65">
+            <p className="mt-1.5 text-xs leading-relaxed text-white/70">
               PostgreSQL indexing &amp; schema optimization
             </p>
           </div>
 
           {/* 342 to 18 ms */}
-          <div className="number-tile rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-            <p className="font-serif text-3xl tracking-tight text-white sm:text-4xl">
-              <span className="text-white/40 line-through">342</span>{" "}
+          <div className="number-tile rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-6">
+            <p className="font-serif text-[clamp(1.3rem,2.8vw,2.35rem)] leading-none tracking-tight text-white">
+              <span className="text-white/45 line-through">342</span>{" "}
               <span className="text-indigo-300">→</span>{" "}
               <span data-count-to="18" data-decimals="0">
                 18
               </span>{" "}
-              <span className="font-sans text-lg text-white/70">ms</span>
+              <span className="font-sans text-sm text-white/75 sm:text-lg">ms</span>
             </p>
-            <p className="mt-3 font-mono text-xs uppercase tracking-[0.1em] text-indigo-300">
-              Mean Response Time
+            <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-indigo-300 sm:text-xs">
+              Mean Latency
             </p>
-            <p className="mt-1.5 text-xs text-white/65">
-              FastAPI recommendation engine latency reduction
+            <p className="mt-1.5 text-xs leading-relaxed text-white/70">
+              FastAPI recommendation engine
             </p>
           </div>
 
           {/* 2 Hackathon/ideathon podiums */}
-          <div className="number-tile rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:col-span-2">
-            <p className="font-serif text-4xl tracking-tight text-white sm:text-5xl">
+          <div className="number-tile col-span-2 rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-6">
+            <p className="font-serif text-[clamp(1.75rem,3.6vw,3rem)] leading-none tracking-tight text-white">
               <span data-count-to="2" data-decimals="0">
                 2
               </span>
             </p>
-            <p className="mt-3 font-mono text-xs uppercase tracking-[0.1em] text-indigo-300">
+            <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-indigo-300 sm:text-xs">
               Hackathon &amp; Ideathon Podiums
             </p>
-            <p className="mt-1.5 text-xs text-white/65">
+            <p className="mt-1.5 text-xs leading-relaxed text-white/70">
               First Prize: Idea2Impact (BVCOE, Pune) · First Runner-up: Make Your
               Own Jarvis
             </p>

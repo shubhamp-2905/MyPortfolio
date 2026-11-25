@@ -43,7 +43,12 @@ export default function Contact() {
   );
 
   const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches
+    ) {
+      return;
+    }
     const btn = magneticBtnRef.current;
     if (!btn) return;
     const rect = btn.getBoundingClientRect();
@@ -93,11 +98,11 @@ export default function Contact() {
           <div className="lg:col-span-8">
             <h2
               ref={headingRef}
-              className="font-serif text-4xl leading-[1.04] tracking-[-0.025em] text-[var(--ink)] sm:text-6xl lg:text-[4.25rem]"
+              className="font-serif text-[clamp(2.35rem,5.2vw,4.25rem)] leading-[1.04] tracking-[-0.025em] text-[var(--ink)]"
             >
               Let&apos;s build something reliable.
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--muted-ink)]">
+            <p className="mt-5 max-w-[60ch] text-base leading-relaxed text-[var(--muted-ink)]">
               Open to Data Engineering, AI Engineering, and backend-focused roles or
               technical collaborations.
             </p>
@@ -108,7 +113,7 @@ export default function Contact() {
                 href={`mailto:${SITE_CONFIG.email}`}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className="btn-primary-pill group inline-flex items-center gap-2 rounded-full bg-[var(--ink)] px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-[var(--accent)]"
+                className="btn-primary-pill group inline-flex min-h-[44px] items-center gap-2 rounded-full bg-[var(--ink)] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[var(--accent)]"
               >
                 <Mail className="h-4 w-4" />
                 <span>Send an email</span>
@@ -118,7 +123,7 @@ export default function Contact() {
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-3.5 text-sm font-medium text-[var(--ink)] transition-colors hover:border-[var(--border-hover)] hover:bg-[var(--surface-muted)]"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-3 text-sm font-medium text-[var(--ink)] transition-colors hover:border-[var(--border-hover)] hover:bg-[var(--surface-muted)]"
               >
                 {copied ? (
                   <>
@@ -143,9 +148,9 @@ export default function Contact() {
               <li>
                 <a
                   href={`mailto:${SITE_CONFIG.email}`}
-                  className="flex items-center justify-between text-[var(--ink)] transition-colors hover:text-[var(--accent)]"
+                  className="flex min-h-[44px] items-center justify-between gap-2 break-all text-[var(--ink)] transition-colors hover:text-[var(--accent)] sm:break-normal"
                 >
-                  <span className="truncate">{SITE_CONFIG.email}</span>
+                  <span>{SITE_CONFIG.email}</span>
                   <ArrowUpRight className="h-3.5 w-3.5 shrink-0" />
                 </a>
               </li>

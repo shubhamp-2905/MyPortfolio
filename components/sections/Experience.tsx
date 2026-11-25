@@ -19,38 +19,52 @@ export default function Experience() {
 
       if (prefersReducedMotion) return;
 
-      if (timelineLineRef.current && listRef.current) {
-        gsap.fromTo(
-          timelineLineRef.current,
-          { scaleY: 0 },
-          {
-            scaleY: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: listRef.current,
-              start: "top 75%",
-              end: "bottom 75%",
-              scrub: true,
-            },
-          }
-        );
-      }
+      const mm = gsap.matchMedia();
 
-      if (listRef.current) {
-        const cards = listRef.current.querySelectorAll(".experience-card");
-        gsap.from(cards, {
-          y: 24,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: listRef.current,
-            start: "top 82%",
-            once: true,
-          },
-        });
-      }
+      mm.add(
+        {
+          isDesktop: "(min-width: 1024px)",
+          isMobile: "(max-width: 1023px)",
+        },
+        (context) => {
+          const isDesktop = Boolean(context.conditions?.isDesktop);
+
+          if (timelineLineRef.current && listRef.current) {
+            gsap.fromTo(
+              timelineLineRef.current,
+              { scaleY: 0 },
+              {
+                scaleY: 1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: listRef.current,
+                  start: "top 78%",
+                  end: "bottom 75%",
+                  scrub: true,
+                },
+              }
+            );
+          }
+
+          if (listRef.current) {
+            const cards = listRef.current.querySelectorAll(".experience-card");
+            gsap.from(cards, {
+              y: isDesktop ? 24 : 14,
+              opacity: 0,
+              duration: isDesktop ? 0.8 : 0.6,
+              stagger: 0.1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: listRef.current,
+                start: "top 84%",
+                once: true,
+              },
+            });
+          }
+        }
+      );
+
+      return () => mm.revert();
     },
     { scope: sectionRef }
   );
@@ -69,11 +83,11 @@ export default function Experience() {
           subtitle="Internships spanning geospatial ML pipelines, model experimentation, and production web systems."
         />
 
-        <div ref={listRef} className="relative pl-6 md:pl-0">
-          {/* Vertical scrubbed timeline line */}
+        <div ref={listRef} className="relative pl-6 lg:pl-0">
+          {/* Vertical scrubbed timeline line: left edge below 1024px, 25% on desktop */}
           <div
             aria-hidden="true"
-            className="absolute bottom-2 left-1.5 top-2 w-[1px] bg-[var(--border)] md:left-[25%]"
+            className="absolute bottom-2 left-1.5 top-2 w-[1px] bg-[var(--border)] lg:left-[25%]"
           >
             <div
               ref={timelineLineRef}
@@ -85,12 +99,12 @@ export default function Experience() {
             {EXPERIENCES.map((exp) => (
               <article
                 key={exp.id}
-                className="experience-card relative grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-8"
+                className="experience-card relative grid grid-cols-1 gap-3 lg:grid-cols-12 lg:gap-8"
               >
-                {/* Timeline node with glowing pulse on active entry */}
+                {/* Timeline node */}
                 <span
                   aria-hidden="true"
-                  className="absolute -left-[22px] top-2.5 flex h-3 w-3 items-center justify-center md:left-[calc(25%-5px)] md:top-3"
+                  className="absolute -left-[22px] top-1.5 flex h-3 w-3 items-center justify-center lg:left-[calc(25%-5px)] lg:top-3"
                 >
                   {exp.active && (
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-45" />
@@ -102,20 +116,20 @@ export default function Experience() {
                   />
                 </span>
 
-                {/* Sticky date column on desktop */}
-                <div className="md:col-span-3 md:pr-6">
-                  <div className="md:sticky md:top-24">
+                {/* Date column: above card below 1024px, sticky left column on 1024px+ */}
+                <div className="lg:col-span-3 lg:pr-6">
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 lg:sticky lg:top-24 lg:block">
                     <p className="font-mono text-xs font-medium text-[var(--ink)]">
                       {exp.period}
                     </p>
-                    <p className="mt-1 font-mono text-xs text-[var(--muted-ink)]">
+                    <p className="font-mono text-xs text-[var(--muted-ink)] lg:mt-1">
                       {exp.location}
                     </p>
                   </div>
                 </div>
 
                 {/* Role & highlights card */}
-                <SpotlightCard className="p-6 sm:p-7 md:col-span-9">
+                <SpotlightCard className="p-6 sm:p-7 lg:col-span-9">
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-3.5">
                       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--bg)] font-mono text-xs font-semibold text-[var(--accent)]">
@@ -138,7 +152,7 @@ export default function Experience() {
                     )}
                   </div>
 
-                  <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-[var(--muted-ink)]">
+                  <ul className="mt-4 max-w-[70ch] space-y-2.5 text-sm leading-relaxed text-[var(--muted-ink)]">
                     {exp.highlights.map((bullet, i) => (
                       <li key={i} className="flex gap-3">
                         <span

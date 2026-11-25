@@ -236,7 +236,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
               {project.subtitle}
             </p>
 
-            <dl className="mt-6 space-y-4 text-sm leading-relaxed">
+            <dl className="mt-6 max-w-[70ch] space-y-4 text-sm leading-relaxed">
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--muted-ink)]">
                   Problem
@@ -287,8 +287,10 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
               <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--muted-ink)]">
                 System Flow
               </p>
-              <div className="rounded-xl border border-[var(--border)] bg-[var(--bg)] p-4">
-                <ArchitectureDiagram type={project.diagramType} />
+              <div className="overflow-x-auto rounded-xl border border-[var(--border)] bg-[var(--bg)] p-4">
+                <div className="min-w-[300px]">
+                  <ArchitectureDiagram type={project.diagramType} />
+                </div>
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2">
@@ -309,7 +311,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
                   href={project.links.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary-pill group inline-flex items-center gap-1.5 rounded-full bg-[var(--ink)] px-5 py-2.5 text-xs font-medium text-white transition-colors hover:bg-[var(--accent)]"
+                  className="btn-primary-pill group inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-[var(--ink)] px-5 py-2.5 text-xs font-medium text-white transition-colors hover:bg-[var(--accent)]"
                 >
                   <span>Live</span>
                   <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -320,7 +322,7 @@ export default function ProjectCard({ project }: { project: ProjectItem }) {
                   href={project.links.code}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-2.5 text-xs font-medium text-[var(--ink)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                  className="group inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-2.5 text-xs font-medium text-[var(--ink)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
                 >
                   <span>Code</span>
                   <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

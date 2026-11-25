@@ -12,7 +12,6 @@ export default function Projects() {
   const stackRef = useRef<HTMLDivElement>(null);
 
   const featuredProjects = PROJECTS.filter((p) => p.featured);
-  const secondaryProjects = PROJECTS.filter((p) => !p.featured);
 
   useGSAP(
     () => {
@@ -24,7 +23,8 @@ export default function Projects() {
 
       const mm = gsap.matchMedia();
 
-      mm.add("(min-width: 768px)", () => {
+      // Desktop (1024px+): sticky stacking card scale-down
+      mm.add("(min-width: 1024px)", () => {
         const cards = stackRef.current?.querySelectorAll<HTMLElement>(
           ".stacked-project-card"
         );
@@ -52,6 +52,28 @@ export default function Projects() {
         };
       });
 
+      // Mobile & Tablet (<1024px): normal stacked cards with simple fade-up
+      mm.add("(max-width: 1023px)", () => {
+        const cards = stackRef.current?.querySelectorAll<HTMLElement>(
+          ".stacked-project-card"
+        );
+        if (!cards) return;
+
+        cards.forEach((card) => {
+          gsap.from(card, {
+            y: 16,
+            opacity: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 88%",
+              once: true,
+            },
+          });
+        });
+      });
+
       return () => mm.revert();
     },
     { scope: sectionRef }
@@ -71,27 +93,17 @@ export default function Projects() {
           subtitle="Architecture case studies across multimodal RAG, Medallion data pipelines, and multi-agent workflows."
         />
 
-        {/* Featured case studies: Evidentia AI (first), FoodChain AI, Investment Council */}
-        <div ref={stackRef} className="flex flex-col gap-8 md:gap-10">
+        <div ref={stackRef} className="flex flex-col gap-8 lg:gap-10">
           {featuredProjects.map((project, idx) => (
             <div
               key={project.id}
-              className="stacked-project-card md:sticky"
+              className="stacked-project-card lg:sticky"
               style={{ top: `${88 + idx * 20}px` }}
             >
               <ProjectCard project={project} />
             </div>
           ))}
         </div>
-
-        {/* Compact project card (TalentSync) */}
-        {secondaryProjects.length > 0 && (
-          <div className="mt-8 grid grid-cols-1 gap-6">
-            {secondaryProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-        )}
 
         {/* More projects CTA */}
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--border)] pt-7">
@@ -102,7 +114,7 @@ export default function Projects() {
             href={SITE_CONFIG.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-2.5 text-sm font-medium text-[var(--ink)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            className="group inline-flex min-h-[44px] items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-2.5 text-sm font-medium text-[var(--ink)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
             <span>Explore more on GitHub</span>
             <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

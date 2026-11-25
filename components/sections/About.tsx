@@ -20,40 +20,54 @@ export default function About() {
 
       if (prefersReducedMotion) return;
 
-      if (summaryRef.current) {
-        const split = new SplitText(summaryRef.current, { type: "words" });
-        gsap.fromTo(
-          split.words,
-          { opacity: 0.25 },
-          {
-            opacity: 1,
-            stagger: 0.035,
-            ease: "none",
-            scrollTrigger: {
-              trigger: summaryRef.current,
-              start: "top 82%",
-              end: "bottom 55%",
-              scrub: true,
-            },
-          }
-        );
-      }
+      const mm = gsap.matchMedia();
 
-      if (bentoRef.current) {
-        const cards = bentoRef.current.querySelectorAll(".bento-item");
-        gsap.from(cards, {
-          y: 20,
-          opacity: 0,
-          duration: 0.75,
-          stagger: 0.08,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: bentoRef.current,
-            start: "top 85%",
-            once: true,
-          },
-        });
-      }
+      mm.add(
+        {
+          isDesktop: "(min-width: 1024px)",
+          isMobile: "(max-width: 1023px)",
+        },
+        (context) => {
+          const isDesktop = Boolean(context.conditions?.isDesktop);
+
+          if (summaryRef.current && isDesktop) {
+            const split = new SplitText(summaryRef.current, { type: "words" });
+            gsap.fromTo(
+              split.words,
+              { opacity: 0.25 },
+              {
+                opacity: 1,
+                stagger: 0.035,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: summaryRef.current,
+                  start: "top 82%",
+                  end: "bottom 55%",
+                  scrub: true,
+                },
+              }
+            );
+          }
+
+          if (bentoRef.current) {
+            const cards = bentoRef.current.querySelectorAll(".bento-item");
+            gsap.from(cards, {
+              y: isDesktop ? 20 : 12,
+              opacity: 0,
+              duration: isDesktop ? 0.75 : 0.55,
+              stagger: 0.06,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: bentoRef.current,
+                start: "top 85%",
+                once: true,
+              },
+            });
+          }
+        }
+      );
+
+      return () => mm.revert();
     },
     { scope: sectionRef }
   );
@@ -72,20 +86,20 @@ export default function About() {
           subtitle="Where data engineering meets applied AI—built for correctness, latency, and auditability."
         />
 
-        {/* Bento Grid */}
+        {/* Bento Grid: 4 cols desktop, 2 cols tablet, 1 col phone */}
         <div
           ref={bentoRef}
-          className="grid grid-cols-1 gap-5 lg:grid-cols-12"
+          className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4"
         >
-          {/* Bio card (wide) */}
-          <SpotlightCard className="bento-item flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
+          {/* Bio card */}
+          <SpotlightCard className="bento-item flex flex-col justify-between p-6 sm:p-8 md:col-span-2 lg:col-span-2">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--accent)]">
                 Background
               </p>
               <p
                 ref={summaryRef}
-                className="mt-4 text-lg leading-[1.62] tracking-[-0.01em] text-[var(--ink)] sm:text-xl"
+                className="mt-4 max-w-[68ch] text-[clamp(1rem,1.4vw,1.25rem)] leading-[1.62] tracking-[-0.01em] text-[var(--ink)]"
               >
                 {SITE_CONFIG.bio}
               </p>
@@ -98,9 +112,9 @@ export default function About() {
           </SpotlightCard>
 
           {/* Currently building card */}
-          <SpotlightCard className="bento-item flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
+          <SpotlightCard className="bento-item flex flex-col justify-between p-6 sm:p-8 md:col-span-2 lg:col-span-2">
             <div>
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--accent)]">
                   Currently Building
                 </p>
@@ -108,7 +122,7 @@ export default function About() {
                   Loupe Earth
                 </span>
               </div>
-              <p className="mt-4 text-base leading-relaxed text-[var(--ink)]">
+              <p className="mt-4 max-w-[60ch] text-base leading-relaxed text-[var(--ink)]">
                 {SITE_CONFIG.currentlyBuilding}
               </p>
             </div>
@@ -126,8 +140,8 @@ export default function About() {
             </div>
           </SpotlightCard>
 
-          {/* Principles card (3 mini-cards inside) */}
-          <SpotlightCard className="bento-item p-6 sm:p-8 lg:col-span-6">
+          {/* Principles card */}
+          <SpotlightCard className="bento-item p-6 sm:p-8 md:col-span-2 lg:col-span-2">
             <div className="flex items-center gap-2">
               <Compass className="h-4 w-4 text-[var(--accent)]" />
               <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--accent)]">
@@ -155,32 +169,32 @@ export default function About() {
           </SpotlightCard>
 
           {/* Key Proof Stats card */}
-          <SpotlightCard className="bento-item flex flex-col justify-between p-6 sm:p-7 lg:col-span-3">
+          <SpotlightCard className="bento-item flex flex-col justify-between p-6 sm:p-7 md:col-span-1 lg:col-span-1">
             <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--accent)]">
               Measured Impact
             </p>
             <div className="mt-4 space-y-3">
-              <div className="flex items-baseline justify-between border-b border-[var(--border)] pb-2">
+              <div className="flex items-baseline justify-between gap-2 border-b border-[var(--border)] pb-2">
                 <span className="font-mono text-xs text-[var(--muted-ink)]">
-                  Query Latency
+                  Latency
                 </span>
-                <span className="font-serif text-2xl text-[var(--ink)]">
+                <span className="font-serif text-xl text-[var(--ink)] sm:text-2xl">
                   342 → 18 ms
                 </span>
               </div>
-              <div className="flex items-baseline justify-between border-b border-[var(--border)] pb-2">
+              <div className="flex items-baseline justify-between gap-2 border-b border-[var(--border)] pb-2">
                 <span className="font-mono text-xs text-[var(--muted-ink)]">
                   SQL Queries
                 </span>
-                <span className="font-serif text-2xl text-[var(--ink)]">
+                <span className="font-serif text-xl text-[var(--ink)] sm:text-2xl">
                   376 → 2
                 </span>
               </div>
-              <div className="flex items-baseline justify-between">
+              <div className="flex items-baseline justify-between gap-2">
                 <span className="font-mono text-xs text-[var(--muted-ink)]">
                   Records
                 </span>
-                <span className="font-serif text-2xl text-[var(--ink)]">
+                <span className="font-serif text-xl text-[var(--ink)] sm:text-2xl">
                   16K+
                 </span>
               </div>
@@ -188,7 +202,7 @@ export default function About() {
           </SpotlightCard>
 
           {/* Location & availability card */}
-          <SpotlightCard className="bento-item flex flex-col justify-between p-6 sm:p-7 lg:col-span-3">
+          <SpotlightCard className="bento-item flex flex-col justify-between p-6 sm:p-7 md:col-span-1 lg:col-span-1">
             <div>
               <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--accent)]">
                 <MapPin className="h-3.5 w-3.5" />
