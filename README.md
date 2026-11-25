@@ -1,60 +1,63 @@
-# Shubham.dev
+# Shubham Paikrao — Portfolio
 
-> "I build reliable systems powered by AI."
+Personal portfolio for Shubham Paikrao, a Data and AI Engineer specializing in ETL/ELT pipelines, PostgreSQL query optimization, and multi-agent AI workflows.
 
-Computer Science student focused on backend systems, machine learning pipelines and real-world problem solving. I care about correctness, scalability and long-term maintainability.
+Live site: https://my-portfolio-tawny-eta-31.vercel.app/
 
-## 🧠 Engineering Philosophy
+## Tech Stack
 
-- **Problem First**: Understanding the 'why' before the 'how'.
-- **System Design**: Simple systems scale better than complex ones.
-- **Reliability**: Correctness is not optional.
-- **Code as Communication**: Write clean, self-documenting code.
-- **Performance**: Efficiency matters, every millisecond counts.
-- **Iterative Improvement**: Software is living; improve with every commit.
+- **Framework**: Next.js 16 (App Router), React 19, TypeScript
+- **Styling**: Tailwind CSS v4 with CSS custom properties
+- **Typography**: `next/font/google` (Geist, Instrument Serif, Geist Mono)
+- **Motion**: GSAP 3 (ScrollTrigger, SplitText, `@gsap/react`) and Lenis smooth scrolling
+- **Icons**: Lucide React
+- **Deployment**: Vercel
 
-## 💼 Experience
+## Features
 
-### Data Science Intern @ TechCorp Inc.
-*2024*
-- Designed and deployed a predictive maintenance model achieving **15% downtime reduction**.
-- Built automated ETL pipelines processing **500GB+ daily data** using Python and SQL.
+- Light editorial design system with warm off-white surfaces, hairline borders, and a single deep-indigo accent
+- Centralized typed content configuration in `lib/data.ts`
+- Scroll-choreographed animations with `prefers-reduced-motion` fallbacks and mobile-safe breakpoints
+- Interactive architecture diagrams for featured case studies (FoodChain AI Medallion pipeline and Investment Council multi-agent graph)
+- SEO metadata, JSON-LD `Person` schema, generated OpenGraph image, `sitemap.xml`, and `robots.txt`
 
-### Full Stack Developer Intern @ StartupX
-*2024*
-- Refactored legacy React codebase to improve **First Contentful Paint (FCP) by 40%**.
-- Implemented secure Stripe payment integration handling **$10k+ monthly transaction volume**.
+## Local Setup
 
-## 🛠 Technical Skills
+```bash
+npm install
+npm run dev
+```
 
-| Category | Skills |
-|----------|--------|
-| **Languages** | Python, C++, SQL, JavaScript, TypeScript |
-| **Frameworks** | React, Next.js, Node.js, Express, FastAPI, PyTorch |
-| **AI & ML** | Scikit-learn, TensorFlow, NLP, LLMs, RAG, Computer Vision |
-| **Tools & Cloud** | Git, Docker, Kubernetes, AWS, CI/CD |
+Open `http://localhost:3000` in your browser.
 
-## 🚀 Selected Projects
+To run linting and a production build:
 
-### [TalentSync](https://github.com/shubhamp-2905)
-**Intelligent Resume Matching System**
-- semantic search engine using LLMs to understand resume context.
-- Reduced screening time by **70%**.
-- *Tech*: Next.js, MongoDB, Python (FastAPI), OpenAI API, Pinecone.
+```bash
+npm run lint
+npm run build
+```
 
-### [FoodChain](https://github.com/shubhamp-2905)
-**Supply Chain Optimization Platform**
-- Clustering algorithms and time-series forecasting to predict daily demand.
-- Reduced waste by **15%** for pilot vendors.
-- *Tech*: Scikit-learn, Flask, PostgreSQL, React, Pandas.
+## Folder Structure
 
-### [Real-Time Chat Framework](https://github.com/shubhamp-2905)
-**High-Concurrency Messaging System**
-- WebSocket-based pub/sub system handling connection state and persistence.
-- Supports **10k+ concurrent connections** with sub-100ms latency.
-- *Tech*: Node.js, Socket.io, Redis, React, MongoDB.
+```text
+app/
+  globals.css          # Design tokens, Tailwind theme mapping, base styles
+  icon.tsx             # Generated SP favicon
+  layout.tsx           # Root layout, fonts, metadata, JSON-LD, Lenis & Navbar
+  opengraph-image.tsx  # Generated OpenGraph image
+  page.tsx             # Main page section composition
+  robots.ts            # Robots configuration
+  sitemap.ts           # Sitemap configuration
+components/
+  sections/            # Hero, About, Experience, Projects, ProjectCard, Skills, Education, Achievements, Contact
+  shared/              # Navbar, Footer, Preloader, ScrollProgress, SectionHeader, SmoothScroll
+lib/
+  data.ts              # Typed portfolio content
+  gsap.ts              # Client-side GSAP plugin registration
+  utils.ts             # Classname utilities
+public/                # Static assets (shubham.jpg, Shubham_Paikrao_Resume.pdf)
+```
 
-## 📫 Contact
+## License
 
-- **Portfolio**: [Shubham.dev](https://shubham.dev)
-- **GitHub**: [github.com/shubhamp-2905](https://github.com/shubhamp-2905)
+MIT

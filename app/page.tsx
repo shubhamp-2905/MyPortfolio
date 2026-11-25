@@ -1,23 +1,27 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
-import Work from "@/components/sections/Work";
-import Skills from "@/components/sections/Skills";
-import Experience from "@/components/sections/Experience";
-import Achievements from "@/components/sections/Achievements";
-import Contact from "@/components/sections/Contact";
-import Now from "@/components/sections/Now";
+
+const Experience = dynamic(() => import("@/components/sections/Experience"));
+const Projects = dynamic(() => import("@/components/sections/Projects"));
+const ByTheNumbers = dynamic(() => import("@/components/sections/ByTheNumbers"));
+const Skills = dynamic(() => import("@/components/sections/Skills"));
+const Education = dynamic(() => import("@/components/sections/Education"));
+const Achievements = dynamic(() => import("@/components/sections/Achievements"));
+const Contact = dynamic(() => import("@/components/sections/Contact"));
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-0">
+    <>
       <Hero />
       <About />
       <Experience />
-      <Achievements />
-      <Work />
+      <Projects />
+      <ByTheNumbers />
       <Skills />
-      <Now />
+      <Education />
+      <Achievements />
       <Contact />
-    </div>
+    </>
   );
 }

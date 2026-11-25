@@ -1,38 +1,38 @@
-import Link from "next/link";
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { SITE_CONFIG } from "@/lib/data";
 
-const Footer = () => {
-    return (
-        <footer className="border-t border-white/10 bg-black/20 backdrop-blur-lg mt-20">
-            <div className="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-                <div className="text-center md:text-left">
-                    <h3 className="text-xl font-bold font-heading">Shubham Paikrao</h3>
-                    <p className="text-sm text-muted-foreground mt-2">
-                        Building scalable AI systems & architectural solutions.
-                    </p>
-                </div>
+export default function Footer() {
+  return (
+    <footer className="border-t border-[var(--border)] bg-[var(--bg)] py-8">
+      <div className="site-container flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+        <p className="font-mono text-xs text-[var(--muted-ink)]">
+          © {new Date().getFullYear()} {SITE_CONFIG.name}. {SITE_CONFIG.location}.
+        </p>
 
-                <div className="flex items-center gap-6">
-                    <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                        <Github className="w-5 h-5" />
-                    </Link>
-                    <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                        <Linkedin className="w-5 h-5" />
-                    </Link>
-                    <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                        <Twitter className="w-5 h-5" />
-                    </Link>
-                    <Link href="mailto:contact@shubhampaikrao.com" className="text-muted-foreground hover:text-primary transition-colors">
-                        <Mail className="w-5 h-5" />
-                    </Link>
-                </div>
-
-                <p className="text-xs text-muted-foreground">
-                    © {new Date().getFullYear()} Shubham Paikrao. All rights reserved.
-                </p>
-            </div>
-        </footer>
-    );
-};
-
-export default Footer;
+        <div className="flex items-center gap-6 font-mono text-xs text-[var(--muted-ink)]">
+          <a
+            href={SITE_CONFIG.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-[var(--ink)]"
+          >
+            GitHub
+          </a>
+          <a
+            href={SITE_CONFIG.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-[var(--ink)]"
+          >
+            LinkedIn
+          </a>
+          <a
+            href={`mailto:${SITE_CONFIG.email}`}
+            className="transition-colors hover:text-[var(--ink)]"
+          >
+            Email
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
+}
