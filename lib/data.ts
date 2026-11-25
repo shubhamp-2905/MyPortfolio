@@ -72,8 +72,7 @@ export const SITE_CONFIG = {
   role: "Data & AI Engineer",
   eyebrow: "DATA & AI ENGINEER · CS (DATA SCIENCE) '27",
   location: "Pune, India",
-  statusLine:
-    "Open to Data & AI Engineering roles · Currently AI & Data Intern at Loupe Earth, New York",
+  statusLine: "Open to Data & AI Engineering roles",
   valueStatement:
     "From validated Medallion pipelines on PostgreSQL to multimodal RAG platforms with grounded citations, I engineer systems that are measurable, traceable and ready for production, not just impressive in a demo.",
   bio: "I'm a Computer Science (Data Science) undergraduate at VIIT Pune with a 9.06 CGPA and a bias toward systems that hold up under real use. My work sits where data engineering meets applied AI: designing the pipelines, schemas and APIs that models depend on, and the agent workflows that put them to work. I care about correctness first, then latency, then polish, and I prefer to measure a claim before I make it.",

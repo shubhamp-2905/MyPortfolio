@@ -71,9 +71,26 @@ export default function Hero() {
       const mm = gsap.matchMedia();
 
       const runHeroTimeline = (isDesktop: boolean) => {
+        if (!isDesktop) {
+          // Keep all hero copy, buttons, links, and portrait immediately visible on mobile/tablet
+          if (headlineRef.current) {
+            gsap.set(headlineRef.current, { opacity: 1, y: 0, clearProps: "transform" });
+          }
+          if (metaItems && metaItems.length > 0) {
+            gsap.set(metaItems, { opacity: 1, y: 0, clearProps: "transform" });
+          }
+          if (photoWrapRef.current) {
+            gsap.set(photoWrapRef.current, {
+              opacity: 1,
+              clipPath: "inset(0% 0% 0% 0% round 24px)",
+            });
+          }
+          return;
+        }
+
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-        if (headlineRef.current && isDesktop) {
+        if (headlineRef.current) {
           const split = new SplitText(headlineRef.current, {
             type: "lines",
             mask: "lines",
@@ -83,12 +100,7 @@ export default function Hero() {
             opacity: 0,
             duration: 0.9,
             stagger: 0.08,
-          });
-        } else if (headlineRef.current) {
-          tl.from(headlineRef.current, {
-            y: 18,
-            opacity: 0,
-            duration: 0.65,
+            clearProps: "transform,opacity",
           });
         }
 
@@ -96,10 +108,11 @@ export default function Hero() {
           tl.from(
             metaItems,
             {
-              y: isDesktop ? 16 : 10,
+              y: 16,
               opacity: 0,
-              duration: isDesktop ? 0.7 : 0.55,
+              duration: 0.7,
               stagger: 0.05,
+              clearProps: "transform,opacity",
             },
             "-=0.45"
           );
@@ -112,7 +125,7 @@ export default function Hero() {
             {
               clipPath: "inset(0% 0% 0% 0% round 24px)",
               opacity: 1,
-              duration: isDesktop ? 0.95 : 0.7,
+              duration: 0.95,
               ease: "expo.out",
             },
             "-=0.6"
@@ -243,11 +256,11 @@ export default function Hero() {
               {SITE_CONFIG.valueStatement}
             </p>
 
-            {/* Primary & Secondary CTAs (min 44px touch target) */}
-            <div className="hero-meta mt-7 flex flex-wrap items-center gap-3">
+            {/* Primary & Secondary CTAs (balanced mobile grid, inline on sm+) */}
+            <div className="hero-meta mt-7 grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap sm:items-center sm:gap-3">
               <a
                 href="#work"
-                className="btn-primary-pill group inline-flex min-h-[44px] items-center gap-2 rounded-full bg-[var(--ink)] px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[var(--accent)]"
+                className="btn-primary-pill group inline-flex min-h-[46px] items-center justify-center gap-2 rounded-full bg-[var(--ink)] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[var(--accent)] sm:px-6"
               >
                 <span>View Work</span>
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -256,15 +269,15 @@ export default function Hero() {
               <a
                 href={SITE_CONFIG.resumePath}
                 download
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-2.5 text-sm font-medium text-[var(--ink)] transition-colors hover:border-[var(--border-hover)] hover:bg-[var(--surface-muted)]"
+                className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2.5 text-sm font-medium text-[var(--ink)] transition-colors hover:border-[var(--border-hover)] hover:bg-[var(--surface-muted)] sm:px-5"
               >
-                <Download className="h-4 w-4 text-[var(--muted-ink)]" />
-                <span>Download Resume</span>
+                <Download className="h-4 w-4 shrink-0 text-[var(--muted-ink)]" />
+                <span>Resume</span>
               </a>
 
               <a
                 href="#contact"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-transparent px-4 py-2.5 text-sm font-medium text-[var(--muted-ink)] transition-colors hover:text-[var(--accent)]"
+                className="col-span-2 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-[var(--border)]/70 bg-transparent px-4 py-2 text-sm font-medium text-[var(--muted-ink)] transition-colors hover:border-[var(--accent)]/40 hover:text-[var(--accent)] sm:col-span-1 sm:border-transparent"
               >
                 <Mail className="h-4 w-4" />
                 <span>Contact</span>
